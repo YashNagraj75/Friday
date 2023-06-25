@@ -1,4 +1,4 @@
-import openai ,pyttsx3,os,zipfile,json,spotipy,webbrowser,requests,bs4,base64,datetime,random
+import pyttsx3,os,zipfile,json,spotipy,webbrowser,requests,bs4,base64,datetime,random,jarvis
 from google.oauth2.credentials import Credentials
 from googleapiclient.errors import HttpError
 from googleapiclient.discovery import build
@@ -21,25 +21,7 @@ def voice(text):
     engine.runAndWait()
 
 
-def LPU():        
-    openai.api_key="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"
 
-    response=openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "user","content": 'how to upload files to drive through accessing api from python '}
-        ],
-
-        temperature=0.9,
-       
-        max_tokens=150
-    )
-    
-    
-    voice(response.choices[0].message['content'])
-    # #voice("Sure boss, the pleasure's all mine")
-    # voice(response['choices'][0]['text'].strip())
-    # return response['choices'][0]['text'].strip()
 
 
 def automate_search(inp):
@@ -227,21 +209,22 @@ def encode(file_name,output):
     base64.encode(file_name,output)
 
 
-def image(prompt):
-    openai.api_key="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"
+# def image(prompt):
+#     openai.api_key="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"
 
-    response=openai.Image.create(
-        prompt=prompt,
-        n=1,
-        size='512x512'
-    )
+#     response=openai.Image.create(
+#         prompt=prompt,
+#         n=1,
+#         size='512x512'
+#     )
 
-    print(response['data'][0]['url'])
-    webbrowser.open(response['data'][0]['url'])
-#automate_search('Ronaldo')
+#     print(response['data'][0]['url'])
+#     webbrowser.open(response['data'][0]['url'])
+# #automate_search('Ronaldo')
 
-backupTo("C:\\Users\\ohm\\Desktop\\Learning\\Python")
-#LPU()
+# backupTo("C:\\Users\\ohm\\Desktop\\Learning\\Python")
+# head = jarvis.Jarvis()
+# head.LPU('hello')
 #print(a.lower())
 #potify()
 
