@@ -1,4 +1,4 @@
-import pyttsx3
+import pyttsx3,datetime
 
 
 
@@ -9,7 +9,7 @@ class Voice:
         self.voice = self.engine.getProperty('voices')
         self.rate = self.engine.getProperty('rate')
         self.engine.setProperty('voice',self.voice[1].id)
-        self.engine.setProperty('rate',175)
+        self.engine.setProperty('rate',150)
 
     def speak(self,text):
         """This function takes the text as input and speaks it out"""
@@ -17,8 +17,19 @@ class Voice:
         self.engine.say(text)
         self.engine.runAndWait()
 
+    def greet(self):
+        
+        hour=datetime.datetime.now().hour
+        if hour < 12:
+            self.speak("Good morning Mr.Yash, I am Friday your personal voice assistant. How may I help you today")
+        elif hour >=12 and hour<16:
+            self.speak("Good afternoon Mr.Yash, I am Friday your personal voice assistant. How may I help you today")
+        else:
+            self.speak("Good evening Mr.Yash, I am Friday your personal voice assistant. How may I help you today")
 
 
 
 
+# new = Voice()
+# new.speak("Hello,Yash I am your assistant")
 

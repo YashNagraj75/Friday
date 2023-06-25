@@ -6,12 +6,15 @@ class Search:
         self.voice=voice.Voice()
 
     def automate_search(self,inp):
-        self.voice.speak('Googling it to get the best optimized results ....')
-        results=100
+        """This model is used to automate the search process for the lazy developers like me."""
+
+        self.voice.speak('Googling it to get the best optimized results ....') # Giving it a niche touch !!!!!
+        results=100 # Minimum number of results to be displayed
+
         page=requests.get(f'https://www.google.com/search?q={inp}&num={results}')
         page.raise_for_status()
         soup=bs4.BeautifulSoup(page.text,'html.parser')
-        links=soup.find_all('a')
+        links=soup.find_all('a') # Finding all the links on all the pages available.
         many=[]
         for link in links:
             href=link.get('href')
@@ -23,3 +26,5 @@ class Search:
         for i in range(no_of_results):
             webbrowser.open(many[i])
 
+# search = Search()
+# search.automate_search('pokemon')

@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload,MediaIoBaseUpload
 import pywhatkit as kit
 import yagmail as email
-import speech_recognition as sr 
+import voxtronix as vox
 
 voice=voice.Voice()
 
@@ -25,7 +25,7 @@ def backupTo(folder):
         number +=1
 
     # Create the Zip file 
-    engine.say(f"Creating backup file {zipFileName}")
+    voice.speak(f"Creating backup file {zipFileName}")
     backup = zipfile.ZipFile(zipFileName,'w')
 
     
@@ -90,31 +90,6 @@ def spotify():
         print("Enter valid ")
 
 
-def hear():
-    r= sr.Recognizer()
-
-    while(1):
-        try:
-            with sr.Microphone() as source2:
-                r.adjust_for_ambient_noise(source2,duration=0.1)
-
-                audio2=r.listen(source2)
-
-                Mytext= r.recognize_google(audio2)
-                Mytext=Mytext.lower()
-
-                print(Mytext)
-                #print(type(Mytext))
-                return Mytext
-
-        except sr.RequestError as e:
-            print(f"Couldn't request because {e}")
-
-        except sr.UnknownValueError :
-            print("Unknown value error")
-        
-        except KeyboardInterrupt:
-            break
 
 
 def map(place):
@@ -122,14 +97,6 @@ def map(place):
     
     webbrowser.open(f'https:\\google.com\\maps\\place\\{place}')
 
-def greet():
-    hour=datetime.datetime.now().hour
-    if hour < 12:
-        voice("Good morning Mr.Yash, I am Friday your personal voice assistant. How may I help you today")
-    elif hour >=12 and hour<16:
-        voice("Good afternoon Mr.Yash, I am Friday your personal voice assistant. How may I help you today")
-    else:
-        voice("Good evening Mr.Yash, I am Friday your personal voice assistant. How may I help you today")
 
         
 def whatsapp(message,person):
@@ -148,7 +115,7 @@ def whatsapp(message,person):
          input_to=input("Enter: ")
          if  input_to == 'yes':
             
-             kit.sendwhatmsg(str(person),message,hour,minute+1)
+            kit.sendwhatmsg(str(person),message,hour,minute+1)
 
 
 def mail():
@@ -160,18 +127,7 @@ def mail():
     # voice("Email sent sucessfully")
         
 
-def jokes():
-    
-    urls=['https://www.funnyshortjokes.com/best-short-jokes','https://www.funnyshortjokes.com','https://www.funnyshortjokes.com/c/hilarious-jokes',"https://www.funnyshortjokes.com/c/racist-jokes","https://www.funnyshortjokes.com/c/dirty-jokes","https://www.funnyshortjokes.com/c/relationship-jokes","https://www.funnyshortjokes.com/c/yo-mama-jokes"]
-    
-    many=[]
-    res=requests.get(random.choice(urls))
-    res.raise_for_status()
-    soup=bs4.BeautifulSoup(res.text,'html.parser')
-    jokes=soup.find_all(class_='post-text')
-    for joke in jokes:
-        many.append(joke.getText().strip())
-    voice(random.choice(many))
+
         
     
 
@@ -190,7 +146,7 @@ def encode(file_name,output):
 
 #     print(response['data'][0]['url'])
 #     webbrowser.open(response['data'][0]['url'])
-automate_search('Ronaldo')
+# automate_search('Ronaldo')
 
 # backupTo("C:\\Users\\ohm\\Desktop\\Learning\\Python")
 # head = jarvis.Jarvis()
