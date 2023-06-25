@@ -1,9 +1,5 @@
-import os,zipfile,json,spotipy,webbrowser,base64,datetime,random,jarvis,voice
-from google.oauth2.credentials import Credentials
-from googleapiclient.errors import HttpError
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaFileUpload,MediaIoBaseUpload
-import pywhatkit as kit
+import os,zipfile,json,spotipy,base64,jarvis,voice,automate_search
+
 import yagmail as email
 import voxtronix as vox
 
@@ -44,18 +40,18 @@ def backupTo(folder):
     backup.close()
     print(os.path.abspath(zipFileName))
     
-    creds= Credentials.from_authorized_user_file('credentials.json',['https://www.googleapis.com/auth/drive'])
-    # Create Drive API Client 
-    drive = build('drive','v3',credentials=creds)
+    # creds= Credentials.from_authorized_user_file('credentials.json',['https://www.googleapis.com/auth/drive'])
+    # # Create Drive API Client 
+    # drive = build('drive','v3',credentials=creds)
 
-    """Now let's upload the backup to drive """
-    file_metadata={'name':zipFileName}
-    folder_id=None
-    if folder_id:
-        file_metadata['parents']=[folder_id]
-    media=MediaFileUpload(os.path.abspath(zipFileName),resumable=True)
-    file=drive.files().create(body=file_metadata,media_body=media,feilds='id').execute()
-    print(f'File ID: {file.get("id")}')
+    # """Now let's upload the backup to drive """
+    # file_metadata={'name':zipFileName}
+    # folder_id=None
+    # if folder_id:
+    #     file_metadata['parents']=[folder_id]
+    # media=MediaFileUpload(os.path.abspath(zipFileName),resumable=True)
+    # file=drive.files().create(body=file_metadata,media_body=media,feilds='id').execute()
+    # print(f'File ID: {file.get("id")}')
     
 
 
@@ -90,32 +86,7 @@ def spotify():
         print("Enter valid ")
 
 
-
-
-def map(place):
-    voice(f"Okay boss, pulling up the map of {place}")
-    
-    webbrowser.open(f'https:\\google.com\\maps\\place\\{place}')
-
-
         
-def whatsapp(message,person):
-    people={'papa': '+919686113665','mama': '+919110865120','sayli': '+919370933529'}
-    hour=datetime.datetime.now().hour
-    minute=datetime.datetime.now().minute
-   
-    if person in people.keys():
-        voice(f"Ok boss sending {person} a whatsapp message saying that {message}")
-        
-        
-        kit.sendwhatmsg(people[person],message,hour,minute+1)
-        
-    else:
-         voice("Ok sir, will send the message but it seem's that the provided number is not on your contact list, should I still send the message Sir")
-         input_to=input("Enter: ")
-         if  input_to == 'yes':
-            
-            kit.sendwhatmsg(str(person),message,hour,minute+1)
 
 
 def mail():
@@ -135,68 +106,35 @@ def encode(file_name,output):
     base64.encode(file_name,output)
 
 
-# def image(prompt):
-#     openai.api_key="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"
 
-#     response=openai.Image.create(
-#         prompt=prompt,
-#         n=1,
-#         size='512x512'
-#     )
+if __name__ =="__main__":    
+    voice.greet()    
+    while True:
+        text=vox.Voxtronix.hear()
+        print(text)
+        if "map" in text:
+            place=jarvis.Friday.LPU(f'Can you tell me only the place whose map I want to open in the this text:-{text}')
+            map(str(place))
+        if "Thank you Friday".lower() in text:
+            voice("Your Welcome boss, hope you have a great day ahead")
+            break
+        if "search" in text or "look up" in text:
+            search_element=LPU(f"Return only the search element in the text :- {text}")
+            automate_search(search_element)
 
-#     print(response['data'][0]['url'])
-#     webbrowser.open(response['data'][0]['url'])
-# automate_search('Ronaldo')
-
-# backupTo("C:\\Users\\ohm\\Desktop\\Learning\\Python")
-# head = jarvis.Jarvis()
-# head.LPU('hello')
-#print(a.lower())
-#potify()
-
-# while True:
-#      hear()
-
-#greet()
-#map('BDA Complex,Nagarbhavi,Banglore-560072')
-
-#automate_search('')
-
-#whatsapp('Hello papa sent this message using code','papa')
-#mail()
-#jokes('hilarious',0)
-
-#encode(secret.txt,'secret.bin')
-#image('Logo for a major tech company')
-
-# if __name__ =="__main__":    
-#     greet()    
-#     while True:
-#         text=hear()
-#         print(text)
-#         if "map" in text:
-#             place=LPU(f'Can you tell me only the place whose map I want to open in the this text:-{text}')
-#             map(str(place))
-#         if "Thank you Friday".lower() in text:
-#             voice("Your Welcome boss, hope you have a great day ahead")
-#             break
-#         if "search" in text or "look up" in text:
-#             search_element=LPU(f"Return only the search element in the text :- {text}")
-#             automate_search(search_element)
-
-#         if 'joke' in text:
+        if 'joke' in text:
            
-#             jokes()
+            jokes()
            
-#         if "whatsapp" in text or 'message' in text:
-#             person=LPU(f'Tell me only the person I want to message in the text:- {text} ')
-#             message=LPU(f'Tell me only the message to be convayed in the text:- {text}')
-#             person=person.lower()
-#             print(person)
-#             whatsapp(message,person)
+        if "whatsapp" in text or 'message' in text:
+            person=LPU(f'Tell me only the person I want to message in the text:- {text} ')
+            message=LPU(f'Tell me only the message to be convayed in the text:- {text}')
+            person=person.lower()
+            print(person)
+            whatsapp(message,person)
 
-#         elif 'email' in text or 'mail' in text:
-#             mail(text)
+        elif 'email' in text or 'mail' in text:
+            mail(text)
             
                 
 
