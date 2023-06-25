@@ -1,4 +1,4 @@
-import pyttsx3,os,zipfile,json,spotipy,webbrowser,requests,bs4,base64,datetime,random,jarvis
+import os,zipfile,json,spotipy,webbrowser,base64,datetime,random,jarvis,voice
 from google.oauth2.credentials import Credentials
 from googleapiclient.errors import HttpError
 from googleapiclient.discovery import build
@@ -7,40 +7,10 @@ import pywhatkit as kit
 import yagmail as email
 import speech_recognition as sr 
 
-
-
-engine=pyttsx3.init()
-voice = engine.getProperty('voices')
-rate = engine.getProperty('rate')
-engine.setProperty('voice',voice[1].id)
-engine.setProperty('rate',175)
-
-def voice(text):
-    print(text)
-    engine.say(text)
-    engine.runAndWait()
+voice=voice.Voice()
 
 
 
-
-
-def automate_search(inp):
-    voice('Googling it to get the best optimized results ....')
-    results=100
-    page=requests.get(f'https://www.google.com/search?q={inp}&num={results}')
-    page.raise_for_status()
-    soup=bs4.BeautifulSoup(page.text,'html.parser')
-    links=soup.find_all('a')
-    many=[]
-    for link in links:
-        href=link.get('href')
-        if 'url?q=' in href and not 'webcache' in href:
-            many.append(href.split('?q=')[1].split('&sa=U')[0])
-
-    voice(f'Found {len(many)} results how many do I display boss')
-    no_of_results=int(input("Enter: "))
-    for i in range(no_of_results):
-        webbrowser.open(many[i])
         
 
 
@@ -220,7 +190,7 @@ def encode(file_name,output):
 
 #     print(response['data'][0]['url'])
 #     webbrowser.open(response['data'][0]['url'])
-# #automate_search('Ronaldo')
+automate_search('Ronaldo')
 
 # backupTo("C:\\Users\\ohm\\Desktop\\Learning\\Python")
 # head = jarvis.Jarvis()
