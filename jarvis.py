@@ -1,25 +1,28 @@
-import openai
+import openai,voice
+
+
 
 class Friday:
     def __init__(self) -> None:
-        self.key = "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"
+        self.key = openai.api_key = "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"
         self.model = "gpt-3.5-turbo"
+        self.voice = voice.Voice()
 
-    def LPU(self,prompt):        
-        # This  NLP model acts as the brain of Friday and for now is powered by chat gpt in future will be powered by my own custom model
-        openai.api_key = self.key
+    def LPU(self):
+        while True:
+            inp = input("Enter: ")
+            completion  = openai.ChatCompletion.create(
+                model = self.model,
+                messages=[
+                    {"role": "system", "content": inp},
+                
+                ]
+            )
+               
+            
+            print(completion.choices[0].message.content)
 
-        response=openai.ChatCompletion.create(
-            model=self.model,
-            messages=[
-                {"role": "user","content": prompt}
-            ],
 
-            temperature=0.9,
-        
-            max_tokens=150
-        )
-        # print("hello")
-        print(response.choices[0].message['content'])
-        
-       
+
+friday  = Friday()
+friday.LPU()
