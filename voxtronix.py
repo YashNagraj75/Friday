@@ -13,10 +13,11 @@ class Voxtronix:
         while(1):
             try:
                 with sr.Microphone() as source2:
-                    self.recognise.adjust_for_ambient_noise(source2,duration=0.1)
+                    self.recognise.adjust_for_ambient_noise(source2,duration=0.2)
 
                     audio2=self.recognise.listen(source2)
 
+                    
                     Mytext= self.recognise.recognize_google(audio2)
                     Mytext=Mytext.lower()
 

@@ -36,5 +36,5 @@ class Backup:
 
 
 
-back = Backup()
-back= back.backup('D:\\Python\\Friday')
+# back = Backup()
+# back= back.backup('D:\\Python\\Friday')
