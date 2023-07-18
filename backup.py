@@ -1,8 +1,9 @@
-import os,zipfile,voice,datetime,send2trash
+import os,zipfile,voice,datetime,send2trash,speech
 
 class Backup:
     def __init__(self):
         self.voice = voice.Voice()
+        self.speech = speech.Synthesize()
         
     def backup(self,folder):
         folder = os.path.abspath(folder) # Checking if it's an absolute path
@@ -15,7 +16,8 @@ class Backup:
                 
                 break
             number +=1
-            self.voice.speak(f"Creating backup file of the folder {os.path.basename(folder)}")
+            # self.voice.speak(f"Creating backup file of the folder {os.path.basename(folder)}")
+            self.speech.The_Oracle(f"Creating backup file of the folder {os.path.basename(folder)}")
             backup = zipfile.ZipFile(zipFileName,'w') # Create the Zip file
 
             for folders,subfolders,filenames in os.walk(folder):

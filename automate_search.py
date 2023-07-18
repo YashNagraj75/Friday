@@ -1,14 +1,16 @@
-import voice,requests,bs4,webbrowser
+import voice,requests,bs4,webbrowser,speech 
 
 
 class Search:
     def __init__(self) -> None:
         self.voice=voice.Voice()
+        self.speech = speech.Synthesize()
 
     def automate_search(self,inp):
         """This model is used to automate the search process for the lazy developers like me."""
 
-        self.voice.speak('Googling it to get the best optimized results ....') # Giving it a niche touch !!!!!
+        # self.voice.speak('Googling it to get the best optimized results ....') # Giving it a niche touch !!!!!
+        self.speech.The_Oracle('Googling it to get the best optimized results ....')
         results=100 # Minimum number of results to be displayed
 
         page=requests.get(f'https://www.google.com/search?q={inp}&num={results}')
@@ -21,9 +23,10 @@ class Search:
             if 'url?q=' in href and not 'webcache' in href:
                 many.append(href.split('?q=')[1].split('&sa=U')[0])
 
-        self.voice.speak(f'Found {len(many)} results how many do I display boss')
-        no_of_results=int(input("Enter: "))
-        for i in range(no_of_results):
+        self.speech.The_Oracle(f'Found {len(many)} results, opening the top 5 results for you.')
+        # no_of_results=int(input("Enter: "))
+        webbrowser.open(f'https://www.google.com/search?q={inp}&num={results}')
+        for i in range(5):
             webbrowser.open(many[i])
 
 # search = Search()

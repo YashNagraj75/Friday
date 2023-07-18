@@ -26,11 +26,12 @@ class Friday:
 
 
 
-# def LPU(self,inp):
+# def LPU():
+#         openai.api_key = "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"
 #         while True:
-#             # inp = input("Enter: ")
+#             inp = input("Enter: ")
 #             completion  = openai.ChatCompletion.create(
-#                 model = self.model,
+#                 model = "gpt-3.5-turbo",
 #                 messages=[
 #                     {"role": "system", "content": inp},
                 
@@ -39,11 +40,11 @@ class Friday:
                 
 #             )
                
-#             return completion.choices[0].message.content
-#             # print(completion.choices[0].message.content)
+#             # return completion.choices[0].message.content
+#             print(completion.choices[0].message.content)
     
 
-
+# LPU()
 
 # friday  = Friday()
 # friday.LPU()  
