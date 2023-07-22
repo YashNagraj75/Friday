@@ -24,6 +24,7 @@ class Friday:
             return completion.choices[0].message.content
             # print(completion.choices[0].message.content)
 
+    
 
 
 # def LPU():
@@ -47,4 +48,4 @@ class Friday:
 # LPU()
 
 # friday  = Friday()
-# friday.LPU()  
+# friday.LPU("Tell me if I want to see the map of a place or not answer in yes or no: 'Hey show me the map of India'")  

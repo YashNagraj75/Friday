@@ -11,8 +11,8 @@ class Synthesize:
   def select_output(self):
     outputDevices = [device for device in sounddevice.query_devices() if device["max_output_channels"] > 0]
     # for i in range(len(outputDevices)):
-    #   print(outputDevices[i]['name'])
-    outputDevice = random.choice([outputDevices[1], outputDevices[2]])
+    #   print(outputDevices[i]['name'])  
+    outputDevice = outputDevices[2]
     return outputDevice
 
   def The_Oracle(self,text):
@@ -31,5 +31,5 @@ class Synthesize:
         else:
             self.The_Oracle("Good Evening Master Yash I am Friday, your personal voice assistant. How may I help you today?")
 
-# new = Synthesize()
-# new.select_output()
+new = Synthesize()
+new.select_output()

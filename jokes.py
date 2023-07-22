@@ -1,4 +1,4 @@
-import requests,bs4,random,voice
+import requests,bs4,random,voice,speech
 
 
 
@@ -7,6 +7,7 @@ class Chaplin:
         self.urls =['https://www.funnyshortjokes.com/best-short-jokes','https://www.funnyshortjokes.com','https://www.funnyshortjokes.com/c/hilarious-jokes',"https://www.funnyshortjokes.com/c/racist-jokes","https://www.funnyshortjokes.com/c/dirty-jokes","https://www.funnyshortjokes.com/c/relationship-jokes","https://www.funnyshortjokes.com/c/yo-mama-jokes"]
         self.golden_times = []
         self.voice = voice.Voice()
+        self.speech = speech.Synthesize()
 
     def tell_jokes(self):
 
@@ -25,7 +26,8 @@ class Chaplin:
             self.golden_times.append(joke.getText().strip())
 
         joke = random.choice(self.golden_times)
-        self.voice.speak(joke)
+        # self.voice.speak(joke)
+        self.speech.The_Oracle(joke)
         
 
 
